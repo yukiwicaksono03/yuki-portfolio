@@ -15,11 +15,16 @@ export function ProjectListRow({ project, formatDate, compact }: ProjectListRowP
   const { selectedProjectId, setSelectedProject, openQuickLook } = useFinderState()
   const isSelected = selectedProjectId === project.id
 
+  const handleClick = () => {
+    if (isSelected) openQuickLook(project.id)
+    else setSelectedProject(project.id)
+  }
+
   if (compact) {
     return (
       <motion.button
         whileTap={{ scale: 0.98 }}
-        onClick={() => setSelectedProject(project.id)}
+        onClick={handleClick}
         onDoubleClick={() => openQuickLook(project.id)}
         className="w-full flex items-center gap-2 px-3 py-2 text-left border-b"
         style={{
@@ -44,9 +49,9 @@ export function ProjectListRow({ project, formatDate, compact }: ProjectListRowP
   return (
     <motion.button
       whileTap={{ scale: 0.99 }}
-      onClick={() => setSelectedProject(project.id)}
+      onClick={handleClick}
       onDoubleClick={() => openQuickLook(project.id)}
-      className="w-full grid grid-cols-[2fr_1fr_2fr_80px] items-center px-4 py-2 border-b text-left"
+      className="w-full grid grid-cols-[1fr_1fr] md:grid-cols-[2fr_1fr_2fr_80px] items-center px-4 py-2 border-b text-left"
       style={{
         borderColor: 'var(--content-border)',
         background: isSelected ? 'var(--accent-dim)' : 'transparent',
@@ -59,25 +64,25 @@ export function ProjectListRow({ project, formatDate, compact }: ProjectListRowP
       }}
     >
       {/* Name */}
-      <span className="flex items-center gap-2">
+      <span className="flex items-center gap-2 min-w-0">
         <FolderIcon color={project.color} size={18} isFile={project.type === 'file'} />
         <span className="text-xs truncate" style={{ color: 'var(--text-primary)' }}>
           {project.name}
         </span>
       </span>
 
-      {/* Date */}
-      <span className="text-xs" style={{ color: 'var(--text-secondary)' }}>
+      {/* Date — desktop only */}
+      <span className="hidden md:block text-xs" style={{ color: 'var(--text-secondary)' }}>
         {formatDate(project.modified)}
       </span>
 
-      {/* Tech */}
+      {/* Tech — col 2 on mobile, col 3 on desktop */}
       <span className="text-xs truncate" style={{ color: 'var(--text-muted)' }}>
-        {project.tech.join(', ')}
+        {project.tech.slice(0, 2).join(', ')}
       </span>
 
-      {/* Size */}
-      <span className="text-xs text-right" style={{ color: 'var(--text-muted)' }}>
+      {/* Size — desktop only */}
+      <span className="hidden md:block text-xs text-right" style={{ color: 'var(--text-muted)' }}>
         {project.size ?? '—'}
       </span>
     </motion.button>

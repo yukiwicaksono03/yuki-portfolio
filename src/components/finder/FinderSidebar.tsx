@@ -27,8 +27,6 @@ const devices: SidebarItem[] = [
   { id: 'resume', label: 'resume.pdf', icon: <FileText size={14} />, isExternal: true },
 ]
 
-const SECTIONS: Section[] = ['about', 'projects', 'stack', 'contact']
-
 function SidebarItemRow({ item, active, onClick }: { item: SidebarItem; active: boolean; onClick: () => void }) {
   return (
     <motion.button
@@ -38,9 +36,7 @@ function SidebarItemRow({ item, active, onClick }: { item: SidebarItem; active: 
         'relative w-full flex items-center gap-2 px-3 py-1.5 rounded-md text-left text-xs transition-colors duration-150',
         active ? 'text-[var(--text-primary)]' : 'text-[var(--sidebar-text)]'
       )}
-      style={{
-        background: active ? 'var(--sidebar-active)' : 'transparent',
-      }}
+      style={{ background: active ? 'var(--sidebar-active)' : 'transparent' }}
       onMouseEnter={(e) => {
         if (!active) (e.currentTarget as HTMLElement).style.background = 'var(--sidebar-hover)'
       }}
@@ -54,9 +50,7 @@ function SidebarItemRow({ item, active, onClick }: { item: SidebarItem; active: 
           style={{ background: 'var(--accent)' }}
         />
       )}
-      <span style={{ color: active ? 'var(--accent)' : 'var(--text-muted)' }}>
-        {item.icon}
-      </span>
+      <span style={{ color: active ? 'var(--accent)' : 'var(--text-muted)' }}>{item.icon}</span>
       <span>{item.label}</span>
       {item.isExternal && (
         <span className="ml-auto text-[10px]" style={{ color: 'var(--text-muted)' }}>↗</span>
@@ -69,52 +63,103 @@ export function FinderSidebar() {
   const { section, setSection } = useFinderState()
 
   return (
-    <motion.aside
-      variants={sidebarVariants}
-      className="relative grain flex flex-col w-[200px] shrink-0 h-full overflow-hidden border-r"
-      style={{
-        background: 'var(--sidebar-bg)',
-        borderColor: 'var(--content-border)',
-      }}
+    // Wrap in a plain div so Tailwind's display:none beats Framer Motion's inline styles
+    <div className="hidden md:flex h-full shrink-0">
+      <motion.aside
+        variants={sidebarVariants}
+        className="relative grain flex flex-col w-[200px] h-full overflow-hidden border-r"
+        style={{
+          background: 'var(--sidebar-bg)',
+          borderColor: 'var(--content-border)',
+        }}
+      >
+        <div className="flex-1 overflow-y-auto px-2 pt-3 pb-4">
+          <div className="mb-2">
+            <p className="px-3 mb-1 text-[10px] font-semibold uppercase tracking-wider" style={{ color: 'var(--sidebar-text-muted)' }}>
+              Favorites
+            </p>
+            {favorites.map((item) => (
+              <SidebarItemRow
+                key={item.id}
+                item={item}
+                active={section === item.id}
+                onClick={() => setSection(item.id as Section)}
+              />
+            ))}
+          </div>
+
+          <div className="mt-4">
+            <p className="px-3 mb-1 text-[10px] font-semibold uppercase tracking-wider" style={{ color: 'var(--sidebar-text-muted)' }}>
+              Devices
+            </p>
+            {devices.map((item) => (
+              <SidebarItemRow
+                key={item.id}
+                item={item}
+                active={false}
+                onClick={() => {
+                  if (item.href) window.open(item.href, '_blank')
+                }}
+              />
+            ))}
+          </div>
+        </div>
+
+        <div className="px-3 py-2 border-t text-[10px]" style={{ borderColor: 'var(--content-border)', color: 'var(--text-muted)' }}>
+          ↑↓ navigate sections
+        </div>
+      </motion.aside>
+    </div>
+  )
+}
+
+const mobileNavItems = [
+  { id: 'about' as Section, label: 'about', icon: <User size={18} /> },
+  { id: 'projects' as Section, label: 'projects', icon: <Folder size={18} /> },
+  { id: 'stack' as Section, label: 'stack', icon: <Wrench size={18} /> },
+  { id: 'contact' as Section, label: 'contact', icon: <Mail size={18} /> },
+]
+
+export function MobileNavBar() {
+  const { section, setSection } = useFinderState()
+
+  return (
+    <motion.nav
+      initial={{ opacity: 0, y: 8 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay: 0.25, duration: 0.3 }}
+      className="shrink-0 border-t"
+      style={{ background: 'var(--sidebar-bg)', borderColor: 'var(--content-border)' }}
     >
-      <div className="flex-1 overflow-y-auto px-2 pt-3 pb-4">
-        {/* FAVORITES */}
-        <div className="mb-2">
-          <p className="px-3 mb-1 text-[10px] font-semibold uppercase tracking-wider" style={{ color: 'var(--sidebar-text-muted)' }}>
-            Favorites
-          </p>
-          {favorites.map((item) => (
-            <SidebarItemRow
+      <div className="flex items-stretch">
+        {mobileNavItems.map((item) => {
+          const isActive = section === item.id
+          return (
+            <button
               key={item.id}
-              item={item}
-              active={section === item.id}
-              onClick={() => setSection(item.id as Section)}
-            />
-          ))}
-        </div>
-
-        {/* DEVICES */}
-        <div className="mt-4">
-          <p className="px-3 mb-1 text-[10px] font-semibold uppercase tracking-wider" style={{ color: 'var(--sidebar-text-muted)' }}>
-            Devices
-          </p>
-          {devices.map((item) => (
-            <SidebarItemRow
-              key={item.id}
-              item={item}
-              active={false}
-              onClick={() => {
-                if (item.href) window.open(item.href, '_blank')
+              onClick={() => setSection(item.id)}
+              className="flex flex-col items-center justify-center gap-1 flex-1 py-2.5 transition-colors duration-150"
+              style={{
+                color: isActive ? 'var(--accent)' : 'var(--text-muted)',
+                background: isActive ? 'var(--accent-dim)' : 'transparent',
               }}
-            />
-          ))}
-        </div>
+            >
+              {item.icon}
+              <span className="text-[10px] font-medium">{item.label}</span>
+            </button>
+          )
+        })}
+        <a
+          href={meta.github}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex flex-col items-center justify-center gap-1 flex-1 py-2.5 transition-colors duration-150"
+          style={{ color: 'var(--text-muted)' }}
+        >
+          <Github size={18} />
+          <span className="text-[10px] font-medium">github</span>
+        </a>
       </div>
-
-      {/* Bottom keyboard hint */}
-      <div className="px-3 py-2 border-t text-[10px]" style={{ borderColor: 'var(--content-border)', color: 'var(--text-muted)' }}>
-        ↑↓ navigate sections
-      </div>
-    </motion.aside>
+    </motion.nav>
   )
 }

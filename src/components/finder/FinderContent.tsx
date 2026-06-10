@@ -42,7 +42,7 @@ export function FinderContent() {
 
       {/* Path bar */}
       <div
-        className="flex items-center px-4 h-6 border-t text-[10px] shrink-0"
+        className="hidden md:flex items-center px-4 h-6 border-t text-[10px] shrink-0"
         style={{ borderColor: 'var(--content-border)', color: 'var(--text-muted)' }}
       >
         <span>Portfolio</span>

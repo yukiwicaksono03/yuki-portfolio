@@ -35,7 +35,7 @@ export function Projects() {
             initial="hidden"
             animate="visible"
             exit="exit"
-            className="p-6 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4"
+            className="p-4 md:p-6 grid grid-cols-3 sm:grid-cols-4 md:grid-cols-4 lg:grid-cols-5 gap-3 md:gap-4"
           >
             {filtered.length === 0 ? (
               <EmptyState />
@@ -59,7 +59,7 @@ export function Projects() {
           >
             {/* List header */}
             <div
-              className="grid grid-cols-[2fr_1fr_2fr_80px] px-4 py-1.5 border-b text-[10px] font-semibold uppercase tracking-wider sticky top-0"
+              className="grid grid-cols-[1fr_1fr] md:grid-cols-[2fr_1fr_2fr_80px] px-4 py-1.5 border-b text-[10px] font-semibold uppercase tracking-wider sticky top-0"
               style={{
                 borderColor: 'var(--content-border)',
                 color: 'var(--text-muted)',
@@ -67,9 +67,10 @@ export function Projects() {
               }}
             >
               <span>Name</span>
-              <span>Date Modified</span>
-              <span>Tech</span>
-              <span className="text-right">Size</span>
+              <span className="hidden md:block">Date Modified</span>
+              <span className="md:hidden">Tech</span>
+              <span className="hidden md:block">Tech</span>
+              <span className="hidden md:block text-right">Size</span>
             </div>
 
             {filtered.length === 0 ? (

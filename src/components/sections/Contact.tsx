@@ -24,7 +24,7 @@ export function Contact() {
   const loginLine = `Last login: ${now.toDateString()} ${now.toTimeString().slice(0, 8)} on ttys001`
 
   return (
-    <div className="h-full overflow-y-auto p-8">
+    <div className="h-full overflow-y-auto p-4 md:p-8">
       <motion.div
         variants={staggerContainer}
         initial="hidden"

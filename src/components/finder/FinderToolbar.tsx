@@ -47,14 +47,17 @@ export function FinderToolbar() {
       </div>
 
       {/* Sort indicator */}
-      <div className="flex items-center gap-1 text-[11px]" style={{ color: 'var(--text-muted)' }}>
+      <div className="hidden sm:flex items-center gap-1 text-[11px]" style={{ color: 'var(--text-muted)' }}>
         <span>Sort by:</span>
         <span style={{ color: 'var(--text-secondary)' }}>Date Modified ▾</span>
       </div>
 
-      {/* Keyboard hint */}
-      <div className="ml-auto text-[10px]" style={{ color: 'var(--text-muted)' }}>
+      {/* Hint */}
+      <div className="ml-auto hidden sm:block text-[10px]" style={{ color: 'var(--text-muted)' }}>
         Space for Quick Look
+      </div>
+      <div className="ml-auto sm:hidden text-[10px]" style={{ color: 'var(--text-muted)' }}>
+        tap to preview
       </div>
     </div>
   )

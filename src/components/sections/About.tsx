@@ -15,7 +15,7 @@ const rows = [
 
 export function About() {
   return (
-    <div className="h-full overflow-y-auto p-8">
+    <div className="h-full overflow-y-auto p-4 md:p-8">
       <motion.div
         variants={staggerContainer}
         initial="hidden"
@@ -35,7 +35,7 @@ export function About() {
               style={{ borderColor: 'var(--content-border)' }}
             >
               <div
-                className="w-36 px-4 py-2.5 text-xs shrink-0 border-r"
+                className="w-24 md:w-36 px-3 md:px-4 py-2.5 text-xs shrink-0 border-r"
                 style={{
                   borderColor: 'var(--content-border)',
                   color: 'var(--text-muted)',
@@ -98,7 +98,7 @@ export function About() {
         </motion.div>
 
         {/* Quick links */}
-        <motion.div variants={staggerItem} className="flex gap-3 mt-6">
+        <motion.div variants={staggerItem} className="flex flex-wrap gap-3 mt-6">
           {[
             { label: 'github ↗', href: meta.github },
             { label: 'linkedin ↗', href: meta.linkedin },

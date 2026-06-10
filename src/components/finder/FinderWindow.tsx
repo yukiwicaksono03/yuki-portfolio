@@ -1,7 +1,7 @@
 'use client'
 import { motion } from 'framer-motion'
 import { FinderTitleBar } from './FinderTitleBar'
-import { FinderSidebar } from './FinderSidebar'
+import { FinderSidebar, MobileNavBar } from './FinderSidebar'
 import { FinderContent } from './FinderContent'
 import { FinderStatusBar } from './FinderStatusBar'
 import { QuickLook } from '@/components/projects/QuickLook'
@@ -34,6 +34,9 @@ export default function FinderWindow() {
       </div>
 
       <FinderStatusBar />
+      <div className="md:hidden">
+        <MobileNavBar />
+      </div>
       <QuickLook />
     </motion.div>
   )

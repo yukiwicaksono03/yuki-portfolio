@@ -21,16 +21,14 @@ export function FinderTitleBar() {
       </div>
 
       {/* Centered title */}
-      <div
-        className="absolute inset-0 flex items-center justify-center pointer-events-none"
-      >
+      <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
         <span className="text-xs font-medium" style={{ color: 'var(--text-secondary)' }}>
           {meta.name} — {section}
         </span>
       </div>
 
-      {/* Search */}
-      <div className="ml-auto flex items-center gap-1.5 z-10">
+      {/* Search — hidden on mobile */}
+      <div className="ml-auto hidden sm:flex items-center gap-1.5 z-10">
         <div
           className="flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs"
           style={{

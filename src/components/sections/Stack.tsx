@@ -6,7 +6,7 @@ import { staggerContainer, staggerItem } from '@/lib/motion'
 
 export function Stack() {
   return (
-    <div className="h-full overflow-y-auto p-8">
+    <div className="h-full overflow-y-auto p-4 md:p-8">
       <motion.div
         variants={staggerContainer}
         initial="hidden"
@@ -39,7 +39,7 @@ export function Stack() {
                   </span>
 
                   {/* Name */}
-                  <span className="w-36 text-xs shrink-0" style={{ color: 'var(--text-primary)' }}>
+                  <span className="w-24 md:w-36 text-xs shrink-0" style={{ color: 'var(--text-primary)' }}>
                     {item.name}
                   </span>
 

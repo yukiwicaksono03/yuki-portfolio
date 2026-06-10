@@ -20,7 +20,10 @@ export function ProjectIcon({ project }: ProjectIconProps) {
       <motion.button
         onHoverStart={() => setHovered(true)}
         onHoverEnd={() => setHovered(false)}
-        onClick={() => setSelectedProject(project.id)}
+        onClick={() => {
+          if (isSelected) openQuickLook(project.id)
+          else setSelectedProject(project.id)
+        }}
         onDoubleClick={() => openQuickLook(project.id)}
         whileHover={{ scale: 1.06 }}
         whileTap={{ scale: 0.97 }}

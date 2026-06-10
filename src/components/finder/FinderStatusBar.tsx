@@ -17,7 +17,7 @@ export function FinderStatusBar() {
   return (
     <motion.div
       variants={statusBarVariants}
-      className="flex items-center justify-center px-4 h-7 shrink-0 border-t"
+      className="hidden md:flex items-center justify-center px-4 h-7 shrink-0 border-t"
       style={{ borderColor: 'var(--content-border)', background: 'var(--content-bg)' }}
     >
       <motion.p
