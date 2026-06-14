@@ -93,41 +93,68 @@ export function QuickLook() {
                 </div>
               </div>
 
-              {/* Links */}
-              <div className="flex gap-3 pt-2 pb-4">
-                {project.live && (
-                  <a
-                    href={project.live}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex-1 py-2.5 rounded-lg text-center text-sm transition-colors"
-                    style={{
-                      background: 'var(--accent)',
-                      color: '#fff',
-                    }}
-                    onMouseEnter={(e) => (e.currentTarget.style.opacity = '0.85')}
-                    onMouseLeave={(e) => (e.currentTarget.style.opacity = '1')}
-                  >
-                    View Live ↗
-                  </a>
-                )}
-                {project.github && (
-                  <a
-                    href={project.github}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex-1 py-2.5 rounded-lg text-center text-sm transition-colors"
-                    style={{
-                      background: 'var(--content-border)',
-                      color: 'var(--text-primary)',
-                    }}
-                    onMouseEnter={(e) => (e.currentTarget.style.background = 'var(--sidebar-active)')}
-                    onMouseLeave={(e) => (e.currentTarget.style.background = 'var(--content-border)')}
-                  >
-                    GitHub ↗
-                  </a>
-                )}
-              </div>
+              {/* Resume language picker */}
+              {project.id === 'resume' ? (
+                <div className="pt-2 pb-4 space-y-3">
+                  <p className="text-[10px] uppercase tracking-wider" style={{ color: 'var(--text-muted)' }}>
+                    Pilih Bahasa / Choose Language
+                  </p>
+                  <div className="flex gap-3">
+                    <a
+                      href="/resume_ID.pdf"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex-1 py-2.5 rounded-lg text-center text-sm transition-opacity"
+                      style={{ background: 'var(--accent)', color: '#fff' }}
+                      onMouseEnter={(e) => (e.currentTarget.style.opacity = '0.85')}
+                      onMouseLeave={(e) => (e.currentTarget.style.opacity = '1')}
+                    >
+                      🇮🇩 Bahasa Indonesia
+                    </a>
+                    <a
+                      href="/resume_EN.pdf"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex-1 py-2.5 rounded-lg text-center text-sm transition-opacity"
+                      style={{ background: 'var(--content-border)', color: 'var(--text-primary)' }}
+                      onMouseEnter={(e) => (e.currentTarget.style.background = 'var(--sidebar-active)')}
+                      onMouseLeave={(e) => (e.currentTarget.style.background = 'var(--content-border)')}
+                    >
+                      🇬🇧 English
+                    </a>
+                  </div>
+                </div>
+              ) : (
+                /* Links */
+                <div className="flex gap-3 pt-2 pb-4">
+                  {project.live && (
+                    <a
+                      href={project.live}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex-1 py-2.5 rounded-lg text-center text-sm transition-colors"
+                      style={{ background: 'var(--accent)', color: '#fff' }}
+                      onMouseEnter={(e) => (e.currentTarget.style.opacity = '0.85')}
+                      onMouseLeave={(e) => (e.currentTarget.style.opacity = '1')}
+                    >
+                      View Live ↗
+                    </a>
+                  )}
+                  {project.github && (
+                    <a
+                      href={project.github}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex-1 py-2.5 rounded-lg text-center text-sm transition-colors"
+                      style={{ background: 'var(--content-border)', color: 'var(--text-primary)' }}
+                      onMouseEnter={(e) => (e.currentTarget.style.background = 'var(--sidebar-active)')}
+                      onMouseLeave={(e) => (e.currentTarget.style.background = 'var(--content-border)')}
+                    >
+                      GitHub ↗
+                    </a>
+                  )}
+                </div>
+              )}
             </div>
 
             {/* Keyboard hint */}

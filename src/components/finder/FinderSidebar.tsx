@@ -60,7 +60,7 @@ function SidebarItemRow({ item, active, onClick }: { item: SidebarItem; active: 
 }
 
 export function FinderSidebar() {
-  const { section, setSection } = useFinderState()
+  const { section, setSection, openQuickLook } = useFinderState()
 
   return (
     // Wrap in a plain div so Tailwind's display:none beats Framer Motion's inline styles
@@ -98,7 +98,8 @@ export function FinderSidebar() {
                 item={item}
                 active={false}
                 onClick={() => {
-                  if (item.href) window.open(item.href, '_blank')
+                  if (item.id === 'resume') openQuickLook('resume')
+                  else if (item.href) window.open(item.href, '_blank')
                 }}
               />
             ))}
